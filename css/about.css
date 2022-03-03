@@ -1,0 +1,81 @@
+* {
+  box-sizing: border-box;
+}
+
+.card-intro {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255);
+}
+
+.card {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  margin: 5px;
+  border-radius: 5px;
+  border: 1px solid grey;
+}
+
+.header-members {
+    text-align:center;
+    margin-top: 0.75em;
+    margin-bottom: 0.75em;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.row-about {
+    padding-left: 3em;
+    padding-right: 3em;
+}
+
+.container::after, .row-about::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+
+.column {
+    float: left;
+    width: 25%;
+    margin-bottom: 16px;
+    padding: 0 8px;
+    font-family: 'Quicksand', sans-serif;
+}
+
+@media screen and (max-width: 300px) {
+    .container {
+        padding: 0 7px;
+    }
+  }
+
+@media screen and (max-width: 465px) {
+    .container {
+        padding: 0 16px;
+    }
+
+}
+
+@media screen and (max-width: 675px) {
+    .column {
+      width: 100%;
+      display: block;
+    }
+}
+
+@media (min-width: 768px) {
+    .card-img-top {
+        width: 100%;
+        min-width: 20rem;
+    }
+
+    img.person {
+        min-width: auto;
+    }
+}
+
+@media screen and (min-width: 675px) and (max-width: 1000px){
+    .column {
+      width: 50%;
+    }
+}
