@@ -4,7 +4,9 @@
 body {
     @include serif-font;
     font-size: 20px;
-    color: $gray-dark;
+    // color: $gray-dark;
+    background-color: #000000;
+    // color: white;
 }
 
 // Typography
@@ -14,6 +16,7 @@ p {
     a {
         text-decoration: underline;
     }
+    background-color: #000000;
 }
 
 h1,
@@ -65,8 +68,8 @@ blockquote {
         padding: 13px;
     }
     .navbar-nav {
-        > li.nav-item {
-            > a {
+        >li.nav-item {
+            >a {
                 text-transform: uppercase;
                 font-size: 12px;
                 font-weight: 800;
@@ -86,8 +89,8 @@ blockquote {
             }
         }
         .navbar-nav {
-            > li.nav-item {
-                > a {
+            >li.nav-item {
+                >a {
                     color: white;
                     padding: 20px;
                     &:hover,
@@ -127,8 +130,8 @@ blockquote {
                 }
             }
             .navbar-nav {
-                > li.nav-item {
-                    > a {
+                >li.nav-item {
+                    >a {
                         color: $gray-dark;
                         &:hover,
                         &:focus {
@@ -172,6 +175,7 @@ blockquote {
         h1 {
             margin-top: 0;
             font-size: 50px;
+            color: #000;
         }
         .subheading {
             font-size: 24px;
@@ -224,30 +228,30 @@ blockquote {
 
 // Post Preview Pages
 .post-preview {
-    > a {
+    >a {
         color: $gray-dark;
         &:hover,
         &:focus {
             text-decoration: none;
             color: $theme-primary;
         }
-        > .post-title {
+        >.post-title {
             font-size: 30px;
             margin-top: 30px;
             margin-bottom: 10px;
         }
-        > .post-subtitle {
+        >.post-subtitle {
             margin: 0;
             font-weight: 300;
             margin-bottom: 10px;
         }
     }
-    > .post-meta {
+    >.post-meta {
         color: $gray-light;
         font-size: 18px;
         font-style: italic;
         margin-top: 0;
-        > a {
+        >a {
             text-decoration: none;
             color: $gray-dark;
             &:hover,
@@ -258,8 +262,8 @@ blockquote {
         }
     }
     @media only screen and (min-width: 768px) {
-        > a {
-            > .post-title {
+        >a {
+            >.post-title {
                 font-size: 36px;
             }
         }
@@ -317,8 +321,8 @@ footer {
         resize: none;
         @include serif-font;
         &::-webkit-input-placeholder {
-        	@include serif-font;
-        	color: $gray-light;
+            @include serif-font;
+            color: $gray-light;
         }
     }
     label {
