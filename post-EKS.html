@@ -62,13 +62,13 @@
     </nav>
 
     <!-- Page Header -->
-    <header class="intro-header" style="background-image: url('img/post-bg.jpg')">
+    <header class="intro-header" style="width:100%; background-image: url('img/cloud6.jpeg');  background-size: cover;">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
                     <div class="post-heading">
-                        <h1>All you need to know about AWS EKS and EKS preventive controls.</h1>
-                        <h2 class="subheading">Problems look mighty small from 150 miles up</h2>
+                        <h1>AWS EKS Preventive Controls</h1>
+                        <h2 class="subheading">Step by step tutorial to build a EKS preventive controls.</h2>
                         <span class="meta">Posted by <a href="#">Start Bootstrap</a> on August 24, 2017</span>
                     </div>
                 </div>
@@ -81,43 +81,92 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
-                    <p>Never in all their history have men been able truly to conceive of the world as one: a single sphere, a globe, having the qualities of a globe, a round earth in which all the directions eventually meet, in which there is no center
-                        because every point, or none, is center — an equal earth which all men occupy as equals. The airman's earth, if free men make it, will be truly round: a globe in practice, not in theory.</p>
+                    <h2>EKS Preventive Control</h2>
+                    <br>
+                    <h3>Tools:</h3>
+                    <h4>Amazon Elastic Kubernetes Services (EKS)</h4>
+                    <p>A fully managed service that helps customers run their Kubernetes clusters at scale by minimizing the efforts required to operate a Kubernetes control plane. </p>
 
-                    <p>Science cuts two ways, of course; its products can be used for both good and evil. But there's no turning back from science. The early warnings about technological dangers also come from science.</p>
+                    <h4>AWS Cloud Development Kit (CDK)</h4>
+                    <p>Infrastructure-as-code tool, including EKS cluster, Kubernetes workloads and a CI/CD pipeline. </p>
 
-                    <p>What was most significant about the lunar voyage was not that man set foot on the Moon but that they set eye on the earth.</p>
+                    <h4>Confest</h4>
+                    <p>An open-source tool within CNCF Open Policy Agent suite, to automate preventative controls before the deployment step.</p>
 
-                    <p>A Chinese tale tells of some men sent to harm a young girl who, upon seeing her beauty, become her protectors rather than her violators. That's how I felt seeing the Earth for the first time. I could not help but love and cherish her.</p>
+                    <h3>Overview</h3>
+                    <p>The pipeline in this solution starts with a commit to the CodeCommit repo with the Kubernetes manifest files to be deployed onto EKS cluster. CodeBuild will then run Conftest prepackaged with control policies to validate the Kubernetes
+                        manifest files. If any control policy is breached by the Kubernetes manifest files, CodeBuild will stop the process and prevent the Kubernetes manifest files from being deployed into the run-time environment. If all control policies
+                        are satisfied by the Kubernetes manifest files, then the pipeline will pass the validation step and move on to deployment. The deployment step will provision an EKS cluster with an AWS managed worker node group then deploy the
+                        Kubernetes manifests onto the EKS cluster.
+                    </p>
 
-                    <p>For those who have seen the Earth from space, and for the hundreds and perhaps thousands more who will, the experience most certainly changes your perspective. The things that we share in our world are far more valuable than those
-                        which divide us.</p>
+                    <!-- <img /> -->
 
-                    <h2 class="section-heading">The Final Frontier</h2>
+                    <h3>Steps:</h3>
+                    <ol>
+                        <li>Create a new empty AWS CodeCommit Repo that will be used by the CI/CD pipeline as the code source.</li>
+                        <li>Download the blog source code from the AWS public repo and check into the empty CodeCommit repo created in step 1.</li>
+                        <li>On the development terminal, run the CDK deploy command to provision the CI/CD pipeline.</li>
+                        <li>Validate the Kubernetes validation step in the CI/CD pipeline stops the pipeline due to the Kubernetes manifests violating preventative control policies.</li>
+                        <li>Fix the Kubernetes manifests and push the changes to CodeCommit repo. </li>
+                        <li>Validate the CI/CD pipeline is triggered again and this time it passes the Kubernetes validation step.</li>
+                        <li>Tick the manual approval step in the CI/CD pipeline.</li>
+                        <li>Validate the pipeline successfully provisions an EKS cluster with Kubernetes manifests via CDK deploy.</li>
+                    </ol>
 
-                    <p>There can be no thought of finishing for ‘aiming for the stars.’ Both figuratively and literally, it is a task to occupy the generations. And no matter how much progress one makes, there is always the thrill of just beginning.</p>
+                    <h4>1. Create a Repo</h4>
+                    <p>
+                        Create a new empty AWS CodeCommit repo (following step 1 & 2 in <a href="https://docs.aws.amazon.com/codecommit/latest/userguide/getting-started.html">this</a> article) and git clone that empty repo to your development terminal.
+                    </p>
+                    <!-- <xmp>$ git clone codecommit::ap-southeast-2://cdk_auto_k8s_controls</xmp> -->
 
-                    <p>There can be no thought of finishing for ‘aiming for the stars.’ Both figuratively and literally, it is a task to occupy the generations. And no matter how much progress one makes, there is always the thrill of just beginning.</p>
+                    <h4>2. Example Code</h4>
+                    <p>
+                        On your development terminal, git clone the source code of this blog post from the example AWS code repo <a href="https://github.com/aws-samples/eks-preventative-controls">here</a>.
+                    </p>
 
-                    <blockquote class="blockquote">The dreams of yesterday are the hopes of today and the reality of tomorrow. Science has not yet mastered prophecy. We predict too much for the next year and yet far too little for the next ten.</blockquote>
+                    <h4>3. Move the Example Code to Your Empty Repo</h4>
+                    <p>Copy the source code of the blog post cloned in step 2 to the other local directory linked to the empty CodeCommit repo created in step 1 And then commit and push all the code</p>
+                    <!-- <xmp>git add .</xmp>
+                    <xmp>$ git commit -m "push blog post source code to codecommit repo" $ git push</xmp> -->
 
-                    <p>Spaceflights cannot be stopped. This is not the work of any one man or even a group of men. It is a historical process which mankind is carrying out in accordance with the natural laws of human development.</p>
+                    <h4>4. Configure</h4>
+                    <p>Configure the CDK context parameters that will be used to provision the pipeline:</p>
+                    <p>In cdk.json:</p>
+                    <xmp>(Set the pipelie name as you like)</xmp>
+                    <xmp> "pipeline-name": "EksDeployPipeline", </xmp>
+                    <xmp>(Verify the conftest-download-url as below)</xmp>
+                    <xmp> "conftest-download-url": "https://github.com/open-policy-agent/conftest/releases/download/v0.25.0/conftest_0.25.0_Linux_x86_64.tar.gz",</xmp>
+                    <xmp>(Set the repo name as the one you used in Step 1 described above)</xmp>
+                    <xmp>"codecommit-repo-name": "cdk_auto_k8s_controls"</xmp>
 
-                    <h2 class="section-heading">Reaching for the Stars</h2>
+                    <h4>
+                        5. Deploy
+                    </h4>
+                    <p>Provision the CodePipeline instance in your AWS account.</p>
+                    <xmp>$ npx cdk deploy</xmp>
 
-                    <p>As we got further and further away, it [the Earth] diminished in size. Finally it shrank to the size of a marble, the most beautiful you can imagine. That beautiful, warm, living object looked so fragile, so delicate, that if you touched
-                        it with a finger it would crumble and fall apart. Seeing this has to change a man.</p>
+                    <h4>6. Finish</h4>
 
-                    <a href="#">
-                        <img class="img-responsive" src="img/post-sample-image.jpg" alt="">
-                    </a>
-                    <span class="caption text-muted">To go places and do things that have never been done before – that’s what living is all about.</span>
+                    <p>By now, we have successfully provisioned a CI/CD pipeline with embedded Kubernetes preventative control policies. Validation: Log onto the AWS Management Console and go to the CodePipeline service page, you should see a pipeline named
+                        EksDeployPipeline as shown below:</p>
+                    <img src="img/initial_pipeline_run-698x1024.png" alt="initial_pipeline_run" width="700">
 
-                    <p>Space, the final frontier. These are the voyages of the Starship Enterprise. Its five-year mission: to explore strange new worlds, to seek out new life and new civilizations, to boldly go where no man has gone before.</p>
+                    <p>Looking into the "Details" why the pipline is failing, we can see that there are policy breach in Kubernetes. Hence, the CodeBuild step sets its BUILD state as FAILED and stops the pipeline from deploying the Kubernetes workloads into
+                        runtime environment. </p>
+                    <xmp>In order to deploy the Kubernetes manifests, we need to fix those non-compliant issues</xmp>
+                    <xmp>first: in k8s-manifests/ $ vi guestbook-all-in-one.yaml </xmp>
+                    <xmp>At line 41, put "#" in front to comment out the line of "hostNetwork: true" </xmp>
+                    <xmp>in k8s-manifests/ $ vi nginx.yaml </xmp>
+                    <xmp>Uncomment out the line 7 of "env: prod" </xmp>
+                    <p>Remember to commit and push the changes. Then you will be able to build the pipeline successfully. </p>
+                    <p>Also remeber to approve it manualy!</p>
 
-                    <p>As I stand out here in the wonders of the unknown at Hadley, I sort of realize there’s a fundamental truth to our nature, Man must explore, and this is exploration at its greatest.</p>
+                    <img src="img/successful_deploy.png" alt="successful_deploy" width="700">
+                    <img src="img/successful_validation.png" alt="successful_validation" width="700">
 
-                    <p>Placeholder text by <a href="http://spaceipsum.com/">Space Ipsum</a>. Photographs by <a href="https://www.flickr.com/photos/nasacommons/">NASA on The Commons</a>.</p>
+                    <p>Yeah! You've done it!😊</p>
+
                 </div>
             </div>
         </div>
