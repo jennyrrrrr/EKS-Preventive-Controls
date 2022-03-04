@@ -146,7 +146,7 @@
                     <p>Provision the CodePipeline instance in your AWS account.</p>
                     <xmp>$ npx cdk deploy</xmp>
 
-                    <h4>6. Finish</h4>
+                    <h4>6. Manifest</h4>
 
                     <p>By now, we have successfully provisioned a CI/CD pipeline with embedded Kubernetes preventative control policies. Validation: Log onto the AWS Management Console and go to the CodePipeline service page, you should see a pipeline named
                         EksDeployPipeline as shown below:</p>
@@ -154,13 +154,15 @@
 
                     <p>Looking into the "Details" why the pipline is failing, we can see that there are policy breach in Kubernetes. Hence, the CodeBuild step sets its BUILD state as FAILED and stops the pipeline from deploying the Kubernetes workloads into
                         runtime environment. </p>
-                    <xmp>In order to deploy the Kubernetes manifests, we need to fix those non-compliant issues</xmp>
-                    <xmp>first: in k8s-manifests/ $ vi guestbook-all-in-one.yaml </xmp>
+                    <p>In order to deploy the Kubernetes manifests, we need to fix those non-compliant issues:</p>
+                    <xmp>In k8s-manifests/guestbook-all-in-one.yaml </xmp>
                     <xmp>At line 41, put "#" in front to comment out the line of "hostNetwork: true" </xmp>
-                    <xmp>in k8s-manifests/ $ vi nginx.yaml </xmp>
+                    <xmp>In k8s-manifests/nginx.yaml:</xmp>
                     <xmp>Uncomment out the line 7 of "env: prod" </xmp>
-                    <p>Remember to commit and push the changes. Then you will be able to build the pipeline successfully. </p>
-                    <p>Also remeber to approve it manualy!</p>
+
+                    <h4>7. Finish</h4>
+                    <p>Commit and push the changes. And remeber to approve it manualy!</p>
+                    <p>Then you will be able to build the pipeline successfully. </p>
 
                     <img src="img/successful_deploy.png" alt="successful_deploy" width="700">
                     <img src="img/successful_validation.png" alt="successful_validation" width="700">
