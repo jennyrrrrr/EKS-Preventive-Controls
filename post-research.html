@@ -81,13 +81,38 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
+
+                    <h2 class="section-heading">Our Problem</h2>
+
+                    <p>How to achieve automatic preventive control to protect users’ private information?</p>
+
+                    <h2 class="section-heading">Problem Background</h2>
+
                     <p>Cyber security is a salient and evolving issue in the digital world, and both companies and users suffer from cyber security crises a lot. </p>
 
                     <p>We dug into what the users have lost due to the issues. In <a href="https://www.cybersecurity-review.com/news-june-2018/adidas-us-breach-may-have-exposed-millions-of-customers-personal-info/">Adidas</a> data breach, the limited data including contact information, usernames, and encrypted passwords were leaked. In  <a href="https://cipher.com/blog/analysis-cyber-attack-capital-one/">Capital One</a> data breach, 140,000 Social Security numbers and 80,000 bank account numbers were influenced. In addition, financial loss is another tremendous disadvantage for companies. Capital One agreed to pay $190 million to settle a class-action lawsuit that customers filed against the firm after a hacker broke into its cloud-computing systems and stole their personal information. Although both companies said it will not impact users, in fact, there are many potential harms caused by misuse of leaked data, such as frauds, identity monitoring, credential freeze, etc. </p>
 
                     <p>We investigated the reasons behind the data breach and found out many potential issues and improvements using cloud computing systems, like AWS. </p>
 
-                    <p>Therefore, with support from Deloitte, our team decided to help advance the process of cyber security policies implementation in Amazon Web Services. To be more specific, we will focus on automating Amazon EKS preventative controls in CI/CD using CDK and OPA. We will also present the whole process on this website to other users who are also interested in this topic. </p>
+                    <h2 class="section-heading">Basic Research</h2>
+
+                    <p>What are Security Controls? How many different categories?</p>
+                    <ul>
+                        <li>Preventive controls attempt to prevent an incident from occurring.</li>
+                        <li>Detective controls attempt to detect incidents after they have occurred.</li>
+                        <li>Corrective controls attempt to reverse the impact of an incident.</li>
+                        <li>Deterrent controls attempt to discourage individuals from causing an incident.</li>
+                        <li>Compensating controls are alternative controls used when a primary control is not feasible.</li>
+                    </ul>
+
+                    <p>What’s The Difference Between Preventative And Detective Controls?</p>
+                    <p>A preventive control is designed to be implemented prior to a threat event and reduce and/or avoid the likelihood and potential impact of a successful threat event. A detective control is designed to detect errors and locate attacks against information systems that have already occurred.</p>
+                    <p>The routine analysis of the detective control output provides input to further enhance the preventative control. The goal of continuous analysis is to prevent errors and irregularities from occurring in the first place.</p>
+                    
+                    <h2 class="section-heading">Our Solution </h2>
+
+                    <p>After the interview with engineers and program managers in Deloitte, we found out that detective controls are widely applied to protect the data and system. However, preventative controls in the companies are in scarcity and could be better developed. In addition, procedures of implementing preventative controls are relatively laborious in the current stage.</p>
+                    <p>Therefore, with support from Deloitte, our team decided to help advance the process of preventative controls implementation in Amazon Web Services. To be more specific, we will focus on automating Amazon EKS preventative controls in CI/CD using CDK and OPA. We will also present the whole process on this website to other users who are also interested in this topic. </p>
                 </div>
             </div>
         </div>
